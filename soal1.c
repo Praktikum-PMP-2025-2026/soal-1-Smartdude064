@@ -33,7 +33,7 @@ int main() {
                 arr[i] = *ptr_arr[i];
                 break;
             }
-            for (int j = 1; j <= N; j++) {
+            for (int j = 1; j <= N && i-j >= 0; j++) {
                 if (*ptr_arr[i-j] != -1) {
                     arr[i] = *ptr_arr[i-j];
                     c += 1;
@@ -41,7 +41,7 @@ int main() {
                 }
             }
             //printf("%d %d\n", c, arr[i]);
-            for (int k = 1; k <= N; k++) {
+            for (int k = 1; k <= N && i+k <= N; k++) {
                 if (*ptr_arr[i+k] != -1) {
                     arr[i] += *ptr_arr[i+k];
                     c += 2;
@@ -76,4 +76,3 @@ int main() {
 
     return 0;
 }
- 
