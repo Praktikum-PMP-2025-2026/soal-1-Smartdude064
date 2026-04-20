@@ -28,6 +28,11 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         if (*ptr_arr[i] == -1) {
+            if (N == 1) {
+                *ptr_arr[i] = 0;
+                arr[i] = *ptr_arr[i];
+                break;
+            }
             for (int j = 1; j <= N; j++) {
                 if (*ptr_arr[i-j] != -1 && *ptr_arr[i+j] != -1) {
                     *ptr_arr[i] = floor((*ptr_arr[i+j] + *ptr_arr[i-j]) / 2); //debugging kedua kurang tanda kurung
@@ -66,3 +71,4 @@ int main() {
 
     return 0;
 }
+ 
