@@ -25,8 +25,8 @@ int main() {
         //printf("Nilai %d - %d - %d - %d\n", arr[i], &arr[i], ptr_arr[i], *ptr_arr[i]);
     }
     
-
     for (int i = 0; i < N; i++) {
+        int c = 0;
         if (*ptr_arr[i] == -1) {
             if (N == 1) {
                 *ptr_arr[i] = 0;
@@ -34,23 +34,28 @@ int main() {
                 break;
             }
             for (int j = 1; j <= N; j++) {
-                if (*ptr_arr[i-j] != -1 && *ptr_arr[i+j] != -1) {
-                    *ptr_arr[i] = floor((*ptr_arr[i+j] + *ptr_arr[i-j]) / 2); //debugging kedua kurang tanda kurung
-                    arr[i] = *ptr_arr[i];
-                    break;
-                } else if (*ptr_arr[i-j] != -1) {
-                    *ptr_arr[i] = *ptr_arr[i-j];
-                    arr[i] = *ptr_arr[i];
-                    break;
-                } else if (*ptr_arr[i+j] != -1) {
-                    *ptr_arr[i] = *ptr_arr[i+j];
-                    arr[i] = *ptr_arr[i];
-                    break;
-                } else {
-                    *ptr_arr[i] = 0;
-                    arr[i] = *ptr_arr[i];
+                if (*ptr_arr[i-j] != -1) {
+                    arr[i] = *ptr_arr[i-j];
+                    c += 1;
                     break;
                 }
+            }
+            //printf("%d %d\n", c, arr[i]);
+            for (int k = 1; k <= N; k++) {
+                if (*ptr_arr[i+k] != -1) {
+                    arr[i] += *ptr_arr[i+k];
+                    c += 2;
+                    break;
+                }
+            }
+            //printf("%d %d\n", c, arr[i]);
+            if (c == 3) {  
+                *ptr_arr[i] = floor(arr[i] / 2);
+                arr[i] = *ptr_arr[i];
+            } 
+            if (c == 0) {
+                *ptr_arr[i] = 0;
+                arr[i] = *ptr_arr[i];
             }
         }
         //printf("Nilai %d - %d - %d - %d\n", arr[i], &arr[i], ptr_arr[i], *ptr_arr[i]);
